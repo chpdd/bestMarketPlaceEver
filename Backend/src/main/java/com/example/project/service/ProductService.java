@@ -1,5 +1,6 @@
 package com.example.project.service;
 
+import com.example.project.dto.response.ImageDTO;
 import com.example.project.dto.response.ProductDTO;
 import com.example.project.entity.Image;
 import com.example.project.entity.Product;
@@ -23,27 +24,24 @@ public class ProductService {
     public void saveProduct(Product product){
         productRepo.save(product);
     }
-    
-    public List<ProductDTO> getAssortment() {
+
+    public List<ProductDTO> getFullAssortment() {
         return productRepo.findAll().
                 stream().map(ProductDTO::new).collect(Collectors.toList());
     }
 
-    public byte[] getImage(Integer imageId) throws ProductNotExistException {
-        Image image = imageRepo.findById(imageId).
-                orElseThrow(() -> new ProductNotExistException("Image not found"));
-        return image.getImage().getBytes();
-    }
-
-    public void uploadImage(MultipartFile file, String altText) throws IOException {
-        Image image = new Image();
-        image.setImage(new String(file.getBytes()));
-        image.setAlt(altText);
-        imageRepo.save(image);
+    public ImageDTO getImageById(Integer imageId) throws ProductNotExistException {
+        Image foundImage = imageRepo.findById(imageId).
+                orElseThrow(() -> new ProductNotExistException("Изображение не найдено"));
+        return ImageDTO.builder().
+                imageId(foundImage.getImageId()).
+                image(foundImage.getImage()).
+                alt(foundImage.getAlt()).
+                build();
     }
 
     public List<ProductDTO> getSpecialOffers() {
-        return productRepo.findByDiscountPriceNotNull().
+        return productRepo.findSpecialOffers().
                 stream().map(ProductDTO::new).collect(Collectors.toList());
     }
 

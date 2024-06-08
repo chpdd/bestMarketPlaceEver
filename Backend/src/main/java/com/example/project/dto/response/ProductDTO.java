@@ -1,5 +1,6 @@
 package com.example.project.dto.response;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import com.example.project.entity.CategoryProduct;
 import com.example.project.entity.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,8 +18,8 @@ public class ProductDTO {
     @JsonProperty("title")
     private String title;
 
-    @JsonProperty("image")
-    private ImageDTO image;
+    @JsonProperty("image_url")
+    private String imageUrl;
 
     @JsonProperty("description")
     private String description;
@@ -44,11 +45,12 @@ public class ProductDTO {
     public ProductDTO(Product product) {
         productId = product.getProductId();
         title = product.getTitle();
-        image = new ImageDTO(
-                product.getImageRecord().getImageId(),
-                product.getImageRecord().getImage(),
-                product.getImageRecord().getAlt()
-        );
+
+        Integer imageId = product.getImageRecord().getImageId();
+
+//        TODO: нужно сделать вытягивание порта из конфига
+        imageUrl = "http://localhost" + 8081 + "/products/image/" + imageId;
+
         description = product.getDescription();
         price = product.getPrice();
         discountPrice = product.getDiscountPrice();
