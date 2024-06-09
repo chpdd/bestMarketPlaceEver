@@ -1,24 +1,42 @@
 package com.example.project.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 
 @Data
 @AllArgsConstructor
 public class ProductRequest {
-    @JsonProperty("pickup_point_id")
-    @NotNull(message = "ID пункта выдачи не может быть пустым")
-    private Integer pickupPointId;
+    @JsonProperty("title")
+    private String title;
 
-    @JsonProperty("products")
-    @Valid
-    @NotEmpty(message = "Список продуктов не может быть пустым")
-    private List<OrderedProductRequest> orderedProducts;
+    @JsonProperty("image")
+    private byte[] image;
+    @JsonProperty("alt")
+    private String alt;
+
+    @JsonProperty("description")
+    private String description;
+
+    @JsonProperty("price")
+    private BigDecimal price;
+
+    @JsonProperty("discount_price")
+    private BigDecimal discountPrice;
+
+    @JsonProperty("quantity_of_available")
+    private Integer quantityOfAvailable;
+
+    @JsonProperty("unit")
+    private String unit;
+
+    @JsonProperty("delivery_days")
+    private Integer deliveryDays;
+
+    @JsonProperty("category_id")
+    private Integer categoryId;
 }
