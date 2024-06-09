@@ -13,11 +13,11 @@ public class CategoryProduct {
     @MapsId("category_id")
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private Category category;
+    private Category categoryRecord;
 
     @Id
     @MapsId("product_id")
     @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    private Product product_category;
+    private Product productRecord;
 }

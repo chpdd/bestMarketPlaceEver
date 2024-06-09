@@ -41,7 +41,8 @@ public class Product {
     private Integer deliveryDays;
 
     @OneToOne(mappedBy = "product_category")
-    private CategoryProduct categories;
+    @JoinColumn(name = "image_id", referencedColumnName = "image_id")
+    private CategoryProduct category;
 
     @OneToMany
     private List<OrderedProduct> productOrders;
