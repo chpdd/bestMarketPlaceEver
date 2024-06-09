@@ -1,9 +1,7 @@
 package com.example.project.dto.response;
 
-import com.example.project.entity.Category;
 import com.example.project.entity.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -38,7 +36,7 @@ public class ProductDTO {
     private Integer deliveryDays;
 
     @JsonProperty("category")
-    private String categoryTitle;
+    private CategoryDTO category;
 
     public ProductDTO(Product product) {
         productId = product.getProductId();
@@ -52,9 +50,9 @@ public class ProductDTO {
         description = product.getDescription();
         price = product.getPrice();
         discountPrice = product.getDiscountPrice();
-        quantityAvailable = product.getQuantityOfAvailable();
+        quantityOfAvailable = product.getQuantityOfAvailable();
         unit = product.getUnit();
         deliveryDays = product.getDeliveryDays();
-        categoryTitle = product.getCategoryRecord().getTitle();
+        category = new CategoryDTO(product.getCategoryRecord());
     }
 }
