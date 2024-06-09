@@ -18,8 +18,8 @@ public class UserInfoDTO {
     private String card_number;
     private Integer CVC;
     private LocalDate validity;
-    private Integer user_discount;
+    private Double user_discount;
     private Integer amount_spent;
-    private Integer kol_order;
-    private Double percent_order;
+    private Integer order_count;
+    private Double redemption_percent;
 }
