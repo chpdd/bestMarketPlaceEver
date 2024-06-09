@@ -16,4 +16,7 @@ public class Category {
 
     @Column(name = "title")
     private String title;
+
+    @OneToMany
+    private List<Product> products;
 }

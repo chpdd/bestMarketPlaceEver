@@ -19,7 +19,7 @@ public class Product {
     @Column(name = "title")
     private String title;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id", referencedColumnName = "image_id")
     private Image imageRecord;
 
@@ -41,7 +41,7 @@ public class Product {
     @Column(name = "delivery_days")
     private Integer deliveryDays;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category categoryRecord;
 

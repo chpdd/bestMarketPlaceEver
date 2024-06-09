@@ -19,4 +19,7 @@ public class Image {
 
     @Column(name = "alt")
     private String alt;
+
+    @OneToOne
+    private Product product;
 }

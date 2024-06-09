@@ -9,7 +9,6 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-@AllArgsConstructor
 public class ProductDTO {
     @JsonProperty("product_id")
     private int productId;
@@ -29,8 +28,8 @@ public class ProductDTO {
     @JsonProperty("discount_price")
     private BigDecimal discountPrice;
 
-    @JsonProperty("quantity_available")
-    private Integer quantityAvailable;
+    @JsonProperty("quantity_of_available")
+    private Integer quantityOfAvailable;
 
     @JsonProperty("unit")
     private String unit;
