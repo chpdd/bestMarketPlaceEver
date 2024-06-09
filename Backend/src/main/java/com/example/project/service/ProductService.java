@@ -1,5 +1,6 @@
 package com.example.project.service;
 
+import com.example.project.dto.response.CategoryDTO;
 import com.example.project.dto.response.ImageDTO;
 import com.example.project.dto.response.ProductDTO;
 import com.example.project.entity.Image;
@@ -28,8 +29,13 @@ public class ProductService {
         productRepo.save(product);
     }
 
-    public List<ProductDTO> getFullAssortment() {
+    public List<ProductDTO> getAssortment() {
         return productRepo.findAll().
+                stream().map(ProductDTO::new).collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> getSpecialOffers() {
+        return productRepo.findSpecialOffers().
                 stream().map(ProductDTO::new).collect(Collectors.toList());
     }
 
@@ -43,13 +49,8 @@ public class ProductService {
                 build();
     }
 
-    public List<ProductDTO> getSpecialOffers() {
-        return productRepo.findSpecialOffers().
-                stream().map(ProductDTO::new).collect(Collectors.toList());
-    }
-
-    public List<String> getAvailableCategories() {
+    public List<CategoryDTO> getAvailableCategories() {
         return categoryRepo.findAll().
-                stream().map().collect(Collectors.toList());
+                stream().map(CategoryDTO::new).collect(Collectors.toList());
     }
 }

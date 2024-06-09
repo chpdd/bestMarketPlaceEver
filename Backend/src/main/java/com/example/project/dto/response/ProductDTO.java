@@ -1,7 +1,6 @@
 package com.example.project.dto.response;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import com.example.project.entity.CategoryProduct;
+import com.example.project.entity.Category;
 import com.example.project.entity.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -40,7 +39,7 @@ public class ProductDTO {
     private Integer deliveryDays;
 
     @JsonProperty("category")
-    private CategoryProduct category;
+    private String categoryTitle;
 
     public ProductDTO(Product product) {
         productId = product.getProductId();
@@ -57,5 +56,6 @@ public class ProductDTO {
         quantityAvailable = product.getQuantityOfAvailable();
         unit = product.getUnit();
         deliveryDays = product.getDeliveryDays();
+        categoryTitle = product.getCategoryRecord().getTitle();
     }
 }

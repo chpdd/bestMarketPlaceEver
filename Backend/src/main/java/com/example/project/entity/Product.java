@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.example.project.dto.response.CategoryDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -40,9 +41,9 @@ public class Product {
     @Column(name = "delivery_days")
     private Integer deliveryDays;
 
-    @OneToOne(mappedBy = "product_category")
-    @JoinColumn(name = "image_id", referencedColumnName = "image_id")
-    private CategoryProduct category;
+    @OneToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private Category categoryRecord;
 
     @OneToMany
     private List<OrderedProduct> productOrders;
