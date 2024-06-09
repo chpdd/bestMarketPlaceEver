@@ -18,7 +18,7 @@ public class Product {
     @Column(name = "title")
     private String title;
 
-    @OneToOne(mappedBy = "image_id")
+    @OneToOne
     @JoinColumn(name = "image_id", referencedColumnName = "image_id")
     private Image imageRecord;
 
@@ -43,7 +43,6 @@ public class Product {
     @OneToOne(mappedBy = "product_category")
     private CategoryProduct categories;
 
-    @OneToMany(mappedBy = "product_id")
+    @OneToMany
     private List<OrderedProduct> productOrders;
-
 }

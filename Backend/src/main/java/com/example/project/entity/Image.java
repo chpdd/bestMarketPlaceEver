@@ -4,8 +4,6 @@ import lombok.Data;
 
 import jakarta.persistence.*;
 
-import java.sql.Blob;
-
 @Data
 @Entity
 @Table(name = "Image")
@@ -16,7 +14,7 @@ public class Image {
     private Integer imageId;
 
     @Lob
-    @Column(name = "image", columnDefinition = "BLOB")
+    @Column(name = "image")
     private byte[] image;
 
     @Column(name = "alt")
