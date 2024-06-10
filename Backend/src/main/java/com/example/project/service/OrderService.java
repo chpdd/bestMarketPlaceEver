@@ -82,7 +82,7 @@ public class OrderService {
             try {
                 var product = products
                         .stream()
-                        .filter(p -> p.getProduct_id() == id)
+                        .filter(p -> p.getProductId() == id)
                         .toList()
                         .get(0);
                 BigDecimal discountPrice;
@@ -136,7 +136,7 @@ public class OrderService {
         }
 
         for (OrderedProduct product : products) {
-            var productId = product.getProduct().getProduct_id(); // мб пофиксить чтобы без доп запросов
+            var productId = product.getProduct().getProductId(); // мб пофиксить чтобы без доп запросов
             if (!received.contains(productId) && !returned.contains(productId)) {
                 throw new ProductsCountMismatchException(Constants.PRODUCT_COUNT_MISMATCH);
             }
