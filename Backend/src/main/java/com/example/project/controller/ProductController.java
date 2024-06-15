@@ -6,22 +6,21 @@ import com.example.project.exception.ImageNotExistException;
 import com.example.project.exception.ProductNotExistException;
 import com.example.project.service.ProductService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/product")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ProductController {
     private ProductService productService;
 
     @PostMapping
     public ResponseEntity<?> addProduct(@Valid @RequestBody ProductRequest request) {
         try {
-            productService.addProduct(request);
-            return new ResponseEntity<>("Продукт успешно сохранён", HttpStatus.OK);
+            return new ResponseEntity<>(productService.addProduct(request), HttpStatus.OK);
         } catch (CategoryNotExistException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
@@ -33,8 +32,7 @@ public class ProductController {
     public ResponseEntity<?> updateProductById(@PathVariable Integer id,
                                                @Valid @RequestBody ProductRequest request) {
         try {
-            productService.updateProductById(id, request);
-            return new ResponseEntity<>("Продукт успешно изменён", HttpStatus.OK);
+            return new ResponseEntity<>(productService.updateProductById(id, request), HttpStatus.OK);
         } catch (CategoryNotExistException | ProductNotExistException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {

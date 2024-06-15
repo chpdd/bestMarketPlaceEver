@@ -28,7 +28,7 @@ public class ProductService {
     private CategoryRepo categoryRepo;
 
 
-    public void addProduct(ProductRequest request)
+    public Product addProduct(ProductRequest request)
             throws CategoryNotExistException {
         Image image = new Image();
         image.setImage(request.getImage());
@@ -49,10 +49,10 @@ public class ProductService {
         product.setDeliveryDays(request.getDeliveryDays());
         product.setCategoryRecord(category);
 
-        productRepo.save(product);
+        return productRepo.save(product);
     }
 
-    public void updateProductById(Integer productId, ProductRequest request)
+    public Product updateProductById(Integer productId, ProductRequest request)
             throws ProductNotExistException, CategoryNotExistException {
         Product product = productRepo.findById(productId).
                 orElseThrow(() -> new ProductNotExistException("Продукт не найден"));
@@ -71,7 +71,7 @@ public class ProductService {
                     orElseThrow(() -> new CategoryNotExistException("Категория не найдена")));
         }
 
-        productRepo.save(product);
+        return productRepo.save(product);
     }
 
     public List<ProductDTO> getFullAssortment() {
