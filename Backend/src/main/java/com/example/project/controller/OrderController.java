@@ -34,8 +34,6 @@ public class OrderController {
     public ResponseEntity<?> getOrdersByUser() {
         try {
             return new ResponseEntity<>(orderService.findAllByUser(), HttpStatus.OK);
-        } catch (NoSuchElementFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -46,7 +44,7 @@ public class OrderController {
         try {
             orderService.create(request);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementFoundException e) {
+        } catch (NoSuchElementFoundException | ProductsCountMismatchException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
